@@ -3,11 +3,131 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="styles.css">
     <script defer src="script.js"></script>
-    <title>Document</title>
+    <title>QuizMaster</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
+    <!-- Screen 1: Quiz Options -->
+             
+    <div class="quiz-title">
+        <h1>QuizMaster</h1>
+    </div>
+    <div class="container" id="screen1">
+
+        <div class="quiz-options">
+            <div class="form-group">
+                <label for="questionCount">
+                 Number of Questions:
+                </label>
+                <input type="number" id="questionCount" min="1" max="50" value="10" placeholder="Enter number (1-50)">
+            </div>
+
+            <div class="form-group">
+                <label for="category">
+                 Category:
+                </label>
+                <select id="category">
+                    <option value="">Any Category</option>
+                </select>
+
+            </div>
+
+            <div class="form-group">
+                <label for="difficulty">
+                   Difficulty:
+                </label>
+                <select id="difficulty">
+                    <option value="">Any Difficulty</option>
+                    <option value="easy">Easy</option>
+                    <option value="medium">Medium</option>
+                    <option value="hard">Hard</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="type">
+                   Question Type:
+                </label>
+                <select id="type">
+                    <option value="">Any Type</option>
+                    <option value="multiple">Multiple Choice</option>
+                    <option value="boolean">True / False</option>
+                </select>
+            </div>
+
+            <button id="startQuiz">
+                <i class="fas fa-play"></i> Start Quiz
+            </button>
+        </div>
+    </div>
+    <div id="errorMessage" class="error-message hidden"></div>
+
+
+    <!-- Screen 2: Quiz Questions -->
+    <div class="container hidden" id="screen2">
+        <div class="quiz-header">
+            <div class="quiz-progress">
+                <span id="questionNumber">Question 1 of 10</span>
+                
+            </div>
+
+            <div class="quiz-meta">
+            <div class="quiz-timer">
+                <i class="fas fa-clock"></i> Time Left: <span id="timer">30</span>s
+            </div>
+            <div class="score">
+                <i class="fas fa-star"></i> Score: <span id="score">0</span>
+            </div>
+            </div>
+        </div>
+
+        
+
+        <div id="quizBox">
+            <h3 id="questionText">Question goes here</h3>
+            <div id="optionsContainer"></div>
+            <div class="button-group">
+            <button id="quitQuiz">
+                <i class="fas fa-sign-out-alt"></i> Quit Quiz
+            </button>
+            <button id="nextBtn">
+                <i class="fas fa-arrow-right"></i> Next Question
+            </button>
+        </div>
+        </div>
+    </div>
     
+    <!-- Screen 3: Quiz Results -->
+    <div class="container hidden" id="screen3">
+        <h1>Quiz Complete!</h1>
+        <div class="result-icon">
+            <i class="fas fa-trophy"></i>
+        </div>
+        <p class="result-text">Your Final Score:</p>
+        <p id="finalScore">0</p>
+
+        <p id="resultMessage" class="result-message"></p>
+        <button id="playAgain">
+            <i class="fas fa-redo"></i> Play Again
+        </button>
+        <button id="review-btn">
+            <i class="fa-solid fa-magnifying-glass"></i> Review 
+        </button>
+    </div>
+
+
+    <!-- Screen 4: Review Mode -->
+    <div class="container hidden" id="screen4">
+        <h2>Review Answers</h2>
+        <div id="reviewList" class="review-list"></div>
+       
+        <button onclick="goToResult()">
+        <i class="fas fa-home"></i> Go to Home
+        </button>
+
+    </div>
+
 </body>
 </html>
