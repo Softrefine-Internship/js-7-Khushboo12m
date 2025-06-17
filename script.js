@@ -40,12 +40,22 @@ const questionTime = 30;
 let timeLeft = questionTime;
 let userAnswers = []; 
 
+function showLoader() {
+  document.getElementById('loader').classList.remove('hidden');
+  document.getElementById('mainContent').classList.add('blur');
+}
+
+function hideLoader() {
+  document.getElementById('loader').classList.add('hidden');
+  document.getElementById('mainContent').classList.remove('blur');
+}
+
 function showError(message) {
   errorBox.textContent = message;
   errorBox.classList.remove('hidden');
   setTimeout(() => {
     errorBox.classList.add('hidden');
-  }, 5000);
+  }, 4000);
 }
 
 function saveState() {
@@ -137,6 +147,7 @@ startBtn.addEventListener('click', async () => {
   if (type) apiURL += `&type=${type}`;
 
   startBtn.disabled = true;
+  showLoader(); 
 
   try {
     const res = await fetch(apiURL);
@@ -163,6 +174,7 @@ startBtn.addEventListener('click', async () => {
   } catch (err) {
     showError(err.message);
   } finally {
+    hideLoader();
     startBtn.disabled = false;
     startBtn.textContent = 'Start Quiz';
   }
@@ -176,6 +188,7 @@ function startQuiz() {
 
   screen1.classList.add('hidden');
   screen2.classList.remove('hidden');
+  errorBox.classList.add('hidden');
 
   userAnswers = [];
   currentQuestionIndex = 0;
@@ -183,9 +196,14 @@ function startQuiz() {
   scoreDisplay.textContent = score;
 
   showQuestion();
+  questionCountInput.value = '';
+  categorySelect.selectedIndex = 0;
+  difficultySelect.selectedIndex = 0;
+  typeSelect.selectedIndex = 0;
 }
 
 function showQuestion() {
+  nextBtn.textContent = "Next Question";
   clearInterval(timer);
   timeLeft = questionTime;
   updateTimerDisplay();
@@ -293,16 +311,26 @@ nextBtn.addEventListener('click', () => {
   currentQuestionIndex++;
   if (currentQuestionIndex < questions.length) {
     showQuestion();
+
+    if (currentQuestionIndex === questions.length - 1) {
+      nextBtn.textContent = "Result";
+    } else {
+      nextBtn.textContent = "Next Question";
+    }
+
   } else {
     showResult();
   }
 });
 
 quitBtn.addEventListener('click', () => {
-  clearInterval(timer);
-  screen2.classList.add('hidden');
-  screen3.classList.remove('hidden');
-  showResult();
+  const confirmQuit = confirm("Are you sure you want to quit the quiz?");
+  if (confirmQuit) {
+    clearInterval(timer);
+    screen2.classList.add('hidden');
+    screen3.classList.remove('hidden');
+    showResult();
+  }
 });
 
 function showResult() {

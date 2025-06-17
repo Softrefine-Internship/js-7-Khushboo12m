@@ -10,10 +10,16 @@
 </head>
 <body>
     <!-- Screen 1: Quiz Options -->
-             
+    <div id="loader" class="hidden">
+        <div class="spinner-div">
+        <div class="spinner"></div>
+        </div>
+        <p>Loading...</p>
+    </div>
     <div class="quiz-title">
         <h1>QuizMaster</h1>
     </div>
+    <div id="mainContent">
     <div class="container" id="screen1">
 
         <div class="quiz-options">
@@ -63,7 +69,7 @@
         </div>
     </div>
     <div id="errorMessage" class="error-message hidden"></div>
-
+    </div>
 
     <!-- Screen 2: Quiz Questions -->
     <div class="container hidden" id="screen2">

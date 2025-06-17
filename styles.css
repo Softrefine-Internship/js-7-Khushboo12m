@@ -311,6 +311,54 @@ button:active {
   margin-top: 10px;
 }
 
+/* spinner */
+#loader {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(255, 255, 255, 0.7); 
+  padding: 1rem 2rem;
+  border-radius: 10px;
+  box-shadow: 0 0 10px #999;
+  font-weight: bold;
+  z-index: 1000;
+}
+
+.blur {
+  filter: blur(4px);
+  pointer-events: none;
+}
+
+.hidden {
+  display: none;
+}
+
+.spinner {
+  border: 5px solid #ccc;
+  border-top: 5px solid #333;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  animation: spin 1s linear infinite;
+}
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+#loader p {
+  margin-top: 10px;
+  font-size: 16px;
+  color: #333;
+}
+.spinner-div{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 @media (max-width: 768px) {
   .container {
     padding: 1.5rem;
